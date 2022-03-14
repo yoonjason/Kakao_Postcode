@@ -28,16 +28,13 @@
       console.log("onReceivedActivityMessageViaJavascriptInterface "+event);
     }
 
-    function postMessageToiOS(postData) {
-        console.log("데이터가 들어왔나?");
+    function postMessageToMobile(postData) {
         var varUA = navigator.userAgent.toLowerCase();
         if ( varUA.indexOf('android') > -1) {
           window.androidBridge?.callBackAddress(JSON.stringify(postData));
         } else if ( varUA.indexOf("iphone") > -1||varUA.indexOf("ipad") > -1||varUA.indexOf("ipod") > -1 ) {
           window.webkit.messageHandlers.callBackAddress.postMessage(postData);
         } 
-        
-        // window.webkit.messageHandlers.callBackHandler.postMessage(postData);
     }
 
     var element_layer = document.getElementById('layer');
@@ -57,10 +54,8 @@
               jibunAddress : jibunAddress,
               zonecode : data.zonecode
           };
-          alert(postData);
           console.log(postData);
-          // return window.webkit.messageHandlers.callBackAddress.postMessage(postData);
-          window.postMessageToiOS(postData);
+          window.postMessageToMobile(postData);
         },
         width : '100%',
         height : '100%'
