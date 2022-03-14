@@ -29,6 +29,7 @@
     }
 
     function postMessageToiOS(postData) {
+        console.log("데이터가 들어왔나?");
         window.webkit.messageHandlers.callBackHandler.postMessage(postData);
     }
 
