@@ -30,7 +30,13 @@
 
     function postMessageToiOS(postData) {
         console.log("데이터가 들어왔나?");
-        window.webkit.messageHandlers.callBackAddress.postMessage(postData);
+        var varUA = navigator.userAgent.toLowerCase();
+        if ( varUA.indexOf('android') > -1) {
+          window.androidBridge?.callBackAddress(JSON.stringify(postData));
+        } else if ( varUA.indexOf("iphone") > -1||varUA.indexOf("ipad") > -1||varUA.indexOf("ipod") > -1 ) {
+          window.webkit.messageHandlers.callBackAddress.postMessage(postData);
+        } 
+        
         // window.webkit.messageHandlers.callBackHandler.postMessage(postData);
     }
 
